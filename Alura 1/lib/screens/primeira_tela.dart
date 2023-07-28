@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class MyFirstWidget extends StatelessWidget {
@@ -77,7 +78,9 @@ class MyFirstWidget extends StatelessWidget {
           ),
           ElevatedButton(
               onPressed: () {
-                print('Você apertou o Botão');
+                if (kDebugMode) {
+                  print('Você apertou o Botão');
+                }
               },
               child: const Text('Aperte o Botão!'))
         ],
