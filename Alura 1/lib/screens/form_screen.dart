@@ -114,7 +114,9 @@ class _FormScreenState extends State<FormScreen> {
                         imageController.text,
                         errorBuilder: (BuildContext context, Object exception,
                             StackTrace? stackTrace) {
-                          return Image.asset('assets/images/nophoto.png');
+                          return Container(
+                              color: Colors.red,
+                              child: Image.asset('assets/images/nophoto.png'));
                         },
                         fit: BoxFit.cover,
                       ),
@@ -131,9 +133,10 @@ class _FormScreenState extends State<FormScreen> {
                               content: Text('Salvando nova Tarefa'),
                             ),
                           );
+                          Navigator.pop(context);
                         }
                       },
-                      child: Text('Adicionar!'))
+                      child: Text('Adicionar'))
                 ],
               ),
             ),
