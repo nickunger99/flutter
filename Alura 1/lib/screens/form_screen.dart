@@ -17,6 +17,23 @@ class _FormScreenState extends State<FormScreen> {
 
   final _formKey = GlobalKey<FormState>();
 
+  bool valueValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  bool difficultyValidator(String? value) {
+    if (value != null && value.isEmpty) {
+      if (int.parse(value) < 1 ||
+          int.parse(value) > 5) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -43,7 +60,7 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (String? value) {
-                        if (value != null && value.isEmpty) {
+                        if (valueValidator(value)) {
                           return 'Insira o nome da Tarefa';
                         }
                         return null;
@@ -62,9 +79,7 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty ||
-                            int.parse(value) < 1 ||
-                            int.parse(value) > 5) {
+                        if (difficultyValidator(value)) {
                           return 'Insira uma dificuldade entre 1 e 5';
                         }
                         return null;
@@ -87,7 +102,7 @@ class _FormScreenState extends State<FormScreen> {
                         setState(() {});
                       },
                       validator: (value) {
-                        if (value!.isEmpty) {
+                        if (valueValidator(value)) {
                           return 'Insira uma URL de Imagem!';
                         }
                         return null;
@@ -131,8 +146,10 @@ class _FormScreenState extends State<FormScreen> {
                           // print(nameController.text);
                           // print(int.parse(difficultyController.text));
                           // print(imageController.text);
-                          TaskInherited.of(widget.taskContent).newTask(nameController.text, imageController.text, int.parse(difficultyController.text));
-
+                          TaskInherited.of(widget.taskContent).newTask(
+                              nameController.text,
+                              imageController.text,
+                              int.parse(difficultyController.text));
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Criando uma nova Tarefa'),
@@ -141,7 +158,7 @@ class _FormScreenState extends State<FormScreen> {
                           Navigator.pop(context);
                         }
                       },
-                      child: Text('Adicionar'))
+                      child: const Text('Adicionar'))
                 ],
               ),
             ),
