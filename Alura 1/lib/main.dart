@@ -13,13 +13,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'First Project',
+      title: 'Tasks',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home:  TaskInherited(
         child: const InitialScreen(),
       ),
+
     );
   }
 }
