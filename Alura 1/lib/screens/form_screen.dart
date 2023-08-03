@@ -1,3 +1,5 @@
+import 'package:Tasks/components/task.dart';
+import 'package:Tasks/data/task_dao.dart';
 import 'package:Tasks/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 
@@ -26,8 +28,7 @@ class _FormScreenState extends State<FormScreen> {
 
   bool difficultyValidator(String? value) {
     if (value != null && value.isEmpty) {
-      if (int.parse(value) < 1 ||
-          int.parse(value) > 5) {
+      if (int.parse(value) < 1 || int.parse(value) > 5) {
         return true;
       }
     }
@@ -146,10 +147,14 @@ class _FormScreenState extends State<FormScreen> {
                           // print(nameController.text);
                           // print(int.parse(difficultyController.text));
                           // print(imageController.text);
-                          TaskInherited.of(widget.taskContent).newTask(
+                          TaskDao().save(Task(
                               nameController.text,
                               imageController.text,
-                              int.parse(difficultyController.text));
+                              int.parse(difficultyController.text)));
+                          // TaskInherited.of(widget.taskContent).newTask(
+                          //     nameController.text,
+                          //     imageController.text,
+                          //     int.parse(difficultyController.text));
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Criando uma nova Tarefa'),

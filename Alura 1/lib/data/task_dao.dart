@@ -28,7 +28,7 @@ $_name TEXT, $_difficulty INTEGER, $_image TEXT);''';
 
   Map<String, dynamic> toMap(Task tarefa) {
     print('Convertendo tarefa em Map: ');
-    final Map<String, dynamic> mapaDeTarefas = Map();
+    final Map<String, dynamic> mapaDeTarefas = {};
     mapaDeTarefas[_name] = tarefa.nome;
     mapaDeTarefas[_difficulty] = tarefa.dificuldade;
     mapaDeTarefas[_image] = tarefa.foto;
