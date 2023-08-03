@@ -1,7 +1,7 @@
 import 'package:Tasks/components/task.dart';
 import 'package:Tasks/data/task_dao.dart';
-import 'package:Tasks/data/task_inherited.dart';
 import 'package:Tasks/screens/form_screen.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class InitialScreen extends StatefulWidget {
@@ -22,12 +22,12 @@ class _InitialScreenState extends State<InitialScreen> {
               onPressed: () {
                 setState(() {});
               },
-              icon: Icon(Icons.refresh))
+              icon: const Icon(Icons.refresh))
         ],
         title: const Text('Tarefas'),
       ),
       body: Padding(
-        padding: EdgeInsets.only(top: 8, bottom: 70),
+        padding: const EdgeInsets.only(top: 8, bottom: 70),
         child: FutureBuilder<List<Task>>(
             future: TaskDao().findAll(),
             builder: (context, snapshot) {
@@ -36,35 +36,31 @@ class _InitialScreenState extends State<InitialScreen> {
                 case ConnectionState.none:
                   return Center(
                     child: Column(
-                      children: [
+                      children: const [
                         CircularProgressIndicator(),
                         Text('Carregando')
                       ],
                     ),
                   );
-                  break;
                 case ConnectionState.waiting:
                   return Center(
                     child: Column(
-                      children: [
+                      children: const [
                         CircularProgressIndicator(),
                         Text('Carregando')
                       ],
                     ),
                   );
 
-                  break;
                 case ConnectionState.active:
                   return Center(
                     child: Column(
-                      children: [
+                      children: const [
                         CircularProgressIndicator(),
                         Text('Carregando')
                       ],
                     ),
                   );
-
-                  break;
                 case ConnectionState.done:
                   if (snapshot.hasData && items != null) {
                     if (items.isNotEmpty) {
@@ -78,7 +74,7 @@ class _InitialScreenState extends State<InitialScreen> {
                     return Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: const [
                           Icon(
                             Icons.error_outline,
                             size: 128,
@@ -91,10 +87,8 @@ class _InitialScreenState extends State<InitialScreen> {
                       ),
                     );
                   }
-                  return Text('Erro ao carregar Tarefas');
-                  break;
+                  return const Text('Erro ao carregar Tarefas');
               }
-              return Text('Erro desconhecido');
             }),
       ),
       floatingActionButton: FloatingActionButton(
@@ -105,7 +99,9 @@ class _InitialScreenState extends State<InitialScreen> {
               builder: (contextNew) => FormScreen(taskContent: context),
             ),
           ).then((value) => setState(() {
-                print('Recarregando tela inicial');
+                if (kDebugMode) {
+                  print('Recarregando tela inicial');
+                }
               }));
         },
         child: const Icon(Icons.add),

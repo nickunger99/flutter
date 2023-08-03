@@ -1,6 +1,5 @@
 import 'package:Tasks/components/task.dart';
 import 'package:Tasks/data/task_dao.dart';
-import 'package:Tasks/data/task_inherited.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
