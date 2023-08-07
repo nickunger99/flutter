@@ -99,9 +99,7 @@ class _InitialScreenState extends State<InitialScreen> {
               builder: (contextNew) => FormScreen(taskContent: context),
             ),
           ).then((value) => setState(() {
-                if (kDebugMode) {
                   print('Recarregando tela inicial');
-                }
               }));
         },
         child: const Icon(Icons.add),
