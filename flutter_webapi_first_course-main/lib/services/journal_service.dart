@@ -13,11 +13,11 @@ class JournalService {
   }
 
   register(String content) {
-    client.post(Uri.parse(getUrl()), body: {"content": content});
+    http.post(Uri.parse(getUrl()), body: {"content": content});
   }
 
   Future<String> get() async{
-   http.Response response = await client.get(Uri.parse(getUrl()));
+   http.Response response = await http.get(Uri.parse(getUrl()));
    print(response.body);
    return response.body;
   }
